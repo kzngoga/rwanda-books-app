@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Rwanda Books",
+    "slug": "rwanda-books-app",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
+    "orientation": "portrait",
+    "icon": "./assets/images/logo.png",
+    "splash": {
+      "image": "./assets/images/splashLogo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.rwandabooks",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/images/logo.png"
+    },
+    "scheme": "rwanda-books"
+  }
+}
