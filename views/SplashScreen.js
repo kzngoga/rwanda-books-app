@@ -1,10 +1,21 @@
-import React from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Image, StyleSheet, Text, BackHandler } from 'react-native';
 import withContainer from '../withContainer';
 import Btn from '../components/utilities/CustomButton';
 import styled from 'styled-components';
 
-export const SplashScreen = () => {
+const SplashScreen = ({ navigation: { navigate } }) => {
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () =>
+      BackHandler.exitApp()
+    );
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress');
+    };
+  }, []);
+
+  const signUp = () => navigate('SignUp');
+
   return (
     <>
       <SplashContainer>
@@ -63,6 +74,7 @@ export const SplashScreen = () => {
                 color="#21305f"
                 padding={12}
                 marginTop={5}
+                onPress={signUp}
               />
             </View>
           </View>
@@ -92,7 +104,7 @@ const WelcomeTxt = styled.View`
 const WelcomeTitle = styled.Text`
   font-weight: bold;
   font-size: 40px;
-  color: #111;
+  color: #343a40;
 `;
 
 const BtnStyle = styled.View`
