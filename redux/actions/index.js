@@ -1,19 +1,20 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default axios.create({
   baseURL: 'https://ibitabo-rwanda-api.herokuapp.com/',
 });
 
-export const configAdmin = {
+export const configAdmin = async () => ({
   headers: {
     ContentType: 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('RB_adminToken')}`,
+    Authorization: `Bearer ${await AsyncStorage.getItem('RB_adminToken')}`,
   },
-};
+});
 
-export const configUser = {
+export const configUser = async () => ({
   headers: {
     ContentType: 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('RB_userToken')}`,
+    Authorization: `Bearer ${await AsyncStorage.getItem('RB_userToken')}`,
   },
-};
+});

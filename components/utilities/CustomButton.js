@@ -25,7 +25,7 @@ const LoaderButton = (props) => {
         style={[
           styles.btnText,
           {
-            color: props.validity ? '#666666' : '#ffffff',
+            color: props.validity ? '#ffffff' : '#ffffff',
             fontSize: props.fontSize,
           },
         ]}
