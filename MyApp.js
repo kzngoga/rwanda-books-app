@@ -2,7 +2,9 @@ import React from 'react';
 import SplashScreen from './views/SplashScreen';
 import AppLoader from './views/AppLoader';
 import SignUp from './views/SignUp';
+import Login from './views/Login';
 import SuccessPage from './views/SuccessPage';
+import MainApp from './views/MainNav';
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -14,8 +16,10 @@ const MyApp = () => {
     {
       SplashScreen,
       AppLoader,
+      Login,
       SignUp,
       SuccessPage,
+      MainApp,
     },
     {
       initialRouteName: 'AppLoader',
