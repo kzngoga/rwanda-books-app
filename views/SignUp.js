@@ -554,16 +554,16 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Regular',
     paddingLeft: 15,
     borderRadius: 5,
-    fontSize: 12,
+    fontSize: 13,
     marginTop: 18,
   },
 
   memberText: {
     fontFamily: 'OpenSans-Regular',
-    marginTop: 35,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 30,
     fontSize: 13,
-    color: '#FFFFFF',
+    color: '#343a40',
     textAlign: 'center',
   },
 

@@ -8,10 +8,9 @@ const AppLoader = ({ navigation: { navigate } }) => {
   const getToken = async () => {
     // SplashScreen.hide();
     try {
-      const token = await AsyncStorage.getItem('AUTH_TOKEN');
+      const token = await AsyncStorage.getItem('RB_userToken');
       if (token) {
-        // navigate('MainApp');
-        console.log('Logged In');
+        navigate('MainApp');
       } else navigate('SplashScreen');
     } catch (e) {
       // console.log('Error Reading Token');

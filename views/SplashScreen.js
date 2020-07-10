@@ -14,8 +14,17 @@ const SplashScreen = ({ navigation: { navigate } }) => {
     };
   }, []);
 
-  const signUp = () => navigate('SignUp');
+  const login = () => {
+    requestAnimationFrame(() => {
+      navigate('Login');
+    });
+  };
 
+  const signUp = () => {
+    requestAnimationFrame(() => {
+      navigate('SignUp');
+    });
+  };
   return (
     <>
       <SplashContainer>
@@ -65,6 +74,7 @@ const SplashScreen = ({ navigation: { navigate } }) => {
                 color="#83bb44"
                 marginTop={5}
                 padding={12}
+                onPress={login}
               />
               <Btn
                 style={{ flex: 3 }}
