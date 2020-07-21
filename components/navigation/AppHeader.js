@@ -18,7 +18,7 @@ const AppHeader = ({ navigation, screens, popScreen, noBack }) => {
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'black',
+        backgroundColor: '#fff',
         shadowColor: 'rgba(0, 0, 0, 0.25)',
         shadowOffset: { width: 0, height: 3 },
         elevation: 10,
@@ -37,7 +37,7 @@ const AppHeader = ({ navigation, screens, popScreen, noBack }) => {
             justifyContent: 'center',
           }}
         >
-          <Icon name="back" width={11} height={19} color="#fff" />
+          <Icon name="back" width={17} height={15} color="#343a40" />
         </TouchableOpacity>
       ) : null}
       <View style={{ flex: 1, alignItems: 'center' }}>
@@ -48,7 +48,7 @@ const AppHeader = ({ navigation, screens, popScreen, noBack }) => {
 };
 
 const Title = styled.Text`
-  color: white;
+  color: #343a40;
   font-size: 16px;
   font-family: 'OpenSans-SemiBold';
 `;
