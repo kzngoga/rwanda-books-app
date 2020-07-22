@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import SettingsScreen from '../../views/SettingsScreen';
+import MyWebView from '../../views/MyWebView';
+import AboutScreen from '../../views/AboutScreen';
 import { connect } from 'react-redux';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
@@ -21,6 +23,12 @@ function SettingsNav({ navigation }) {
     {
       SettingsScreen: {
         screen: WithHeader(SettingsScreen),
+      },
+      AboutScreen: {
+        screen: WithHeader(AboutScreen),
+      },
+      MyWebView: {
+        screen: WithHeader(MyWebView),
       },
     },
     {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
 import * as Font from 'expo-font';
@@ -18,7 +18,9 @@ const fetchFonts = () => {
 
 const App = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
-
+  useEffect(() => {
+    console.disableYellowBox = true;
+  });
   if (!dataLoaded) {
     return (
       <AppLoading

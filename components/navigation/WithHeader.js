@@ -21,8 +21,7 @@ export default (ScreenComp, savedNoBack) => (props) => {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#232323',
-          paddingBottom: 50,
+          backgroundColor: '#fff',
         }}
       >
         <ScreenComp

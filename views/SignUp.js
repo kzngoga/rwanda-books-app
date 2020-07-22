@@ -65,7 +65,7 @@ class SignUp extends Component {
           loadText: false,
           withErrors: true,
           isSubmitted: true,
-          message: 'Account already exist!',
+          message: 'Username / Email already exist!',
           isSubmitting: false,
         });
       }
