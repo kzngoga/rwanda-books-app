@@ -22,6 +22,7 @@ const AppHeader = ({ navigation, screens, popScreen, noBack }) => {
         shadowColor: 'rgba(0, 0, 0, 0.25)',
         shadowOffset: { width: 0, height: 3 },
         elevation: 10,
+        marginTop: 32,
       }}
     >
       {!noBack ? (
@@ -30,14 +31,14 @@ const AppHeader = ({ navigation, screens, popScreen, noBack }) => {
           style={{
             position: 'absolute',
             top: 0,
-            left: 5,
+            left: 20,
             width: 50,
             height: 50,
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <Icon name="back" width={17} height={15} color="#343a40" />
+          <Icon name="back" width={25} height={25} color="#343a40" />
         </TouchableOpacity>
       ) : null}
       <View style={{ flex: 1, alignItems: 'center' }}>

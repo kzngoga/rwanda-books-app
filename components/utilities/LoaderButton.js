@@ -27,7 +27,10 @@ const LoaderButton = (props) => {
         },
       ]}
     >
-      <ActivityIndicator size="large" color={props.loaderColor} />
+      <ActivityIndicator
+        size={props.loaderSize || 'large'}
+        color={props.loaderColor}
+      />
     </View>
   );
 

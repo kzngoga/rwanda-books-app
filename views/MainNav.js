@@ -6,7 +6,6 @@ import MySearchNav from '../components/navigation/MySearchNav';
 import MyLessonsNav from '../components/navigation/MyLessonsNav';
 import SettingsNav from '../components/navigation/SettingsNav';
 import Icon from '../components/utilities/Icon';
-import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -77,7 +76,7 @@ const AppTabNav = () => {
             activeBackgroundColor: '#ffffff',
             inactiveBackgroundColor: '#ffffff',
             tabStyle: {
-              paddingTop: 4,
+              paddingTop: 8,
             },
             style: {
               height: 50,

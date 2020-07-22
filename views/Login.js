@@ -88,10 +88,6 @@ class Login extends Component {
     }
   }
 
-  socialAuth = (type) => {
-    Linking.openURL(`https://tuner-api.herokuapp.com/api/v1/user/${type}`);
-  };
-
   setToken = async (value) => {
     try {
       await AsyncStorage.setItem('RB_userToken', String(value));
