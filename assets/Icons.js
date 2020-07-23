@@ -1,5 +1,13 @@
 import React from 'react';
-import Svg, { Mask, Path, Rect, Circle } from 'react-native-svg';
+import Svg, {
+  Mask,
+  Path,
+  Rect,
+  Circle,
+  Defs,
+  Stop,
+  LinearGradient,
+} from 'react-native-svg';
 
 export default {
   home: ({ width, height, color }) => (
@@ -279,6 +287,86 @@ export default {
     <Svg width={width} height={height} viewBox="0 0 30 30" fill={color}>
       <Path d="M15 0C6.715 0 0 6.715 0 15s6.715 15 15 15 15-6.715 15-15C29.992 6.719 23.281.008 15 0zm0 29C7.27 29 1 22.73 1 15S7.27 1 15 1s14 6.27 14 14c-.008 7.727-6.273 13.992-14 14zm0 0" />
       <Path d="M27.5 14.5c-.277 0-.5.223-.5.5-.008 6.625-5.375 11.992-12 12a.499.499 0 100 1c7.176-.008 12.992-5.824 13-13 0-.277-.223-.5-.5-.5zM15 2C7.824 2.008 2.008 7.824 2 15a.499.499 0 101 0C3.008 8.375 8.375 3.008 15 3a.499.499 0 100-1zm0 5.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm0 2a.498.498 0 01-.5-.5.499.499 0 111 0c0 .277-.223.5-.5.5zM17.5 20h-1v-8.5h-5V13c0 .55.45 1 1 1h1v8.5h5V21c0-.55-.45-1-1-1zm0 1.5h-3V13h-2v-.5h3V21h2zm0 0" />
+    </Svg>
+  ),
+  facebook: ({ width, height }) => (
+    <Svg width={width} height={height} viewBox="0 0 30 30">
+      <Path
+        d="M26.25 0H3.75C1.68 0 0 1.68 0 3.75v22.5C0 28.316 1.68 30 3.75 30h22.5A3.756 3.756 0 0030 26.25V3.75C30 1.68 28.316 0 26.25 0zm0 0"
+        fill="#3b5999"
+      />
+      <Path
+        d="M20.625 15v-3.75c0-1.035.84-.938 1.875-.938h1.875V5.625h-3.75A5.621 5.621 0 0015 11.25V15h-3.75v4.688H15V30h5.625V19.687h2.813L25.313 15zm0 0"
+        fill="#fff"
+      />
+    </Svg>
+  ),
+  instagram: ({ width, height }) => (
+    <Svg width={width} height={height} viewBox="0 0 30 30">
+      <Defs>
+        <LinearGradient
+          id="prefix__a"
+          gradientUnits="userSpaceOnUse"
+          x1={275.517}
+          y1={4.57}
+          x2={275.517}
+          y2={549.72}
+          gradientTransform="matrix(.05444 0 0 -.05444 0 30.161)"
+        >
+          <Stop offset={0} stopColor="#e09b3d" />
+          <Stop offset={0.3} stopColor="#c74c4d" />
+          <Stop offset={0.6} stopColor="#c21975" />
+          <Stop offset={1} stopColor="#7024c4" />
+        </LinearGradient>
+        <LinearGradient
+          id="prefix__b"
+          gradientUnits="userSpaceOnUse"
+          x1={275.517}
+          y1={4.57}
+          x2={275.517}
+          y2={549.72}
+          gradientTransform="matrix(.05444 0 0 -.05444 0 30.161)"
+        >
+          <Stop offset={0} stopColor="#e09b3d" />
+          <Stop offset={0.3} stopColor="#c74c4d" />
+          <Stop offset={0.6} stopColor="#c21975" />
+          <Stop offset={1} stopColor="#7024c4" />
+        </LinearGradient>
+        <LinearGradient
+          id="prefix__c"
+          gradientUnits="userSpaceOnUse"
+          x1={418.31}
+          y1={4.57}
+          x2={418.31}
+          y2={549.72}
+          gradientTransform="matrix(.05444 0 0 -.05444 0 30.161)"
+        >
+          <Stop offset={0} stopColor="#e09b3d" />
+          <Stop offset={0.3} stopColor="#c74c4d" />
+          <Stop offset={0.6} stopColor="#c21975" />
+          <Stop offset={1} stopColor="#7024c4" />
+        </LinearGradient>
+      </Defs>
+      <Path
+        d="M21.063 0H8.938C4.008 0 0 4.008 0 8.938v12.124C0 25.992 4.008 30 8.938 30h12.124C25.992 30 30 25.992 30 21.062V8.938C30 4.008 25.992 0 21.062 0zm5.917 21.063a5.917 5.917 0 01-5.918 5.917H8.938a5.917 5.917 0 01-5.917-5.918V8.938A5.917 5.917 0 018.937 3.02h12.126a5.917 5.917 0 015.917 5.917zm0 0"
+        fill="url(#prefix__a)"
+      />
+      <Path
+        d="M15 7.242c-4.277 0-7.758 3.48-7.758 7.758 0 4.277 3.48 7.758 7.758 7.758 4.277 0 7.758-3.48 7.758-7.758 0-4.277-3.48-7.758-7.758-7.758zm0 12.5A4.745 4.745 0 0110.258 15 4.745 4.745 0 0115 10.258 4.745 4.745 0 0119.742 15 4.745 4.745 0 0115 19.742zm0 0"
+        fill="url(#prefix__b)"
+      />
+      <Path
+        d="M24.633 7.3c0 1.024-.832 1.86-1.86 1.86a1.859 1.859 0 111.86-1.86zm0 0"
+        fill="url(#prefix__c)"
+      />
+    </Svg>
+  ),
+  twitter: ({ width, height }) => (
+    <Svg width={width} height={height} viewBox="0 0 30 30">
+      <Path
+        d="M9.371 27.184c11.32 0 17.508-9.375 17.508-17.508 0-.266-.008-.531-.02-.793a12.536 12.536 0 003.07-3.188 12.19 12.19 0 01-3.53.97 6.172 6.172 0 002.703-3.403 12.28 12.28 0 01-3.907 1.492 6.146 6.146 0 00-4.492-1.941 6.152 6.152 0 00-5.992 7.554 17.478 17.478 0 01-12.684-6.43 6.148 6.148 0 00-.832 3.094 6.147 6.147 0 002.739 5.121 6.095 6.095 0 01-2.786-.77c-.003.024-.003.052-.003.079a6.153 6.153 0 004.937 6.031 6.172 6.172 0 01-2.777.106A6.157 6.157 0 009.05 21.87a12.352 12.352 0 01-7.64 2.633c-.497 0-.99-.027-1.47-.086a17.41 17.41 0 009.43 2.766"
+        fill="#1da1f2"
+      />
     </Svg>
   ),
 };

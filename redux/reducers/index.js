@@ -7,6 +7,7 @@ import favorites from './favorites';
 import types from './types';
 import lessons from './lessons';
 import categories from './categories';
+import navigation from './navigation';
 
 export default combineReducers({
   ...books,
@@ -16,4 +17,5 @@ export default combineReducers({
   ...types,
   ...lessons,
   ...categories,
+  ...navigation,
 });
