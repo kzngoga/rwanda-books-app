@@ -58,7 +58,7 @@ function SettingsScreen(props) {
       if (!token) {
         navigate('SplashScreen');
       }
-      const baseUrl = 'https://rwanda-books.herokuapp.com/';
+      const baseUrl = 'http://rwanda-books.herokuapp.com';
       navigate('MyWebView', {
         title,
         url: `${baseUrl}${url}`,
@@ -73,7 +73,6 @@ function SettingsScreen(props) {
     try {
       await AsyncStorage.clear();
       setLogout(false);
-      navigate('SplashScreen');
       return setNavReset('logout');
     } catch (e) {
       console.warn(e);
