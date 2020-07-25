@@ -31,7 +31,7 @@ const AppHeader = ({ navigation, screens, popScreen, noBack }) => {
           style={{
             position: 'absolute',
             top: 0,
-            left: 20,
+            left: 5,
             width: 50,
             height: 50,
             alignItems: 'center',

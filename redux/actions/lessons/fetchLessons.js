@@ -1,4 +1,4 @@
-import axios, { configAdmin, configUser } from '..';
+import axios, { configUser } from '..';
 import {
   FETCH_LESSONS_SUCCESS,
   FETCH_LESSONS_FAILED,
@@ -6,16 +6,11 @@ import {
   CLEAR_REMOVE_LESSON,
 } from '../../actionTypes';
 
-export default (type) => async (dispatch) => {
+export default () => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_LESSONS });
     dispatch({ type: CLEAR_REMOVE_LESSON });
-    let response;
-    if (type === 'admin') {
-      response = await axios.get('/api/v1/lessons/all', configAdmin);
-    } else {
-      response = await axios.get('/api/v1/lessons/all', configUser);
-    }
+    const response = await axios.get('/api/v1/lessons/all', await configUser());
 
     const {
       data: { message, data },
