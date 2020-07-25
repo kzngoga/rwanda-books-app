@@ -37,7 +37,7 @@ function SettingsScreen(props) {
   } = props;
   useFocusEffect(
     React.useCallback(() => {
-      addScreen('Settings', 'no-back');
+      addScreen('Account', 'no-back');
       if (status === 'initial') {
         fetchProfile();
         setStatus('fetching');
@@ -94,7 +94,7 @@ function SettingsScreen(props) {
       case 'fetching':
         data = <Loader text="Loading profile..." marginTop="60%" />;
         break;
-      default:
+      case 'unknown_error':
         data = (
           <Text
             style={{
@@ -107,6 +107,9 @@ function SettingsScreen(props) {
             Ooops, Something Unexpected Occured!
           </Text>
         );
+        break;
+      default:
+        data = <Loader text="Loading profile..." marginTop="60%" />;
     }
     return data;
   };
@@ -169,7 +172,7 @@ function SettingsScreen(props) {
                       marginTop: 2,
                     }}
                   >
-                    <Icon name="globe" width={20} height={20} color="#000" />
+                    <Icon name="globe" width={20} height={20} color="#343a40" />
                   </View>
                   <Link>Country Of Origin</Link>
                 </View>
@@ -189,7 +192,12 @@ function SettingsScreen(props) {
                       marginTop: 5,
                     }}
                   >
-                    <Icon name="contact" width={20} height={20} color="#000" />
+                    <Icon
+                      name="contact"
+                      width={20}
+                      height={20}
+                      color="#343a40"
+                    />
                   </View>
                   <Link>Contacts</Link>
                 </View>
@@ -210,7 +218,12 @@ function SettingsScreen(props) {
                       marginTop: 2,
                     }}
                   >
-                    <Icon name="subCard" width={20} height={20} color="#000" />
+                    <Icon
+                      name="subCard"
+                      width={20}
+                      height={20}
+                      color="#343a40"
+                    />
                   </View>
                   <Link>Subscription Details</Link>
                 </View>
@@ -250,7 +263,7 @@ function SettingsScreen(props) {
                       marginTop: 2,
                     }}
                   >
-                    <Icon name="lock" width={20} height={20} color="#000" />
+                    <Icon name="lock" width={20} height={20} color="#343a40" />
                   </View>
                   <Link>Other Actions</Link>
                 </View>
@@ -287,7 +300,7 @@ function SettingsScreen(props) {
                       marginTop: 2,
                     }}
                   >
-                    <Icon name="info" width={20} height={20} color="#000" />
+                    <Icon name="info" width={20} height={20} color="#343a40" />
                   </View>
                   <Link>About Us</Link>
                 </View>

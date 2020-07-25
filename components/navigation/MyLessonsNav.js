@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import WithHeader from './WithHeader';
 import LessonsScreen from '../../views/LessonsScreen';
+import SingleLessonsScreen from '../../views/SingleLessonsScreen';
 
 function MyLessonsNav({ navigation }) {
   useEffect(() => {
@@ -21,7 +22,10 @@ function MyLessonsNav({ navigation }) {
   const LessonsStack = createStackNavigator(
     {
       LessonsScreen: {
-        screen: WithHeader(LessonsScreen, 'no-back'),
+        screen: WithHeader(LessonsScreen),
+      },
+      SingleLessonsScreen: {
+        screen: WithHeader(SingleLessonsScreen),
       },
     },
     {
