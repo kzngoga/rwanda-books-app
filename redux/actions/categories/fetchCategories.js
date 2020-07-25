@@ -1,4 +1,4 @@
-import axios, { configAdmin } from '..';
+import axios from '..';
 import {
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILED,
@@ -13,7 +13,7 @@ export default () => async (dispatch) => {
     dispatch({ type: CLEAR_ADD_CATEGORIES });
     dispatch({ type: CLEAR_UPDATE_CATEGORIES });
 
-    const response = await axios.get('/api/v1/categories/all', configAdmin);
+    const response = await axios.get('/api/v1/categories/all');
 
     const {
       data: { message, data },

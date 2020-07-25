@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import BooksScreen from '../../views/BooksScreen';
+import AllBooks from '../../views/books/AllBooks';
+import CategoryBooks from '../../views/books/CategoryBooks';
 import { connect } from 'react-redux';
 import { setCurrentScreen } from '../../redux/actions/navigation/navigation';
 
@@ -24,6 +26,12 @@ function MyBooksNav({ navigation }) {
     {
       BooksScreen: {
         screen: WithHeader(BooksScreen),
+      },
+      AllBooksScreen: {
+        screen: WithHeader(AllBooks),
+      },
+      CategoryBooksScreen: {
+        screen: WithHeader(CategoryBooks),
       },
     },
     {
