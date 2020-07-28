@@ -92,7 +92,7 @@ function SettingsScreen(props) {
         data = <>{children}</>;
         break;
       case 'fetching':
-        data = <Loader text="Loading profile..." marginTop="60%" />;
+        data = <Loader text="Loading profile..." marginTop="45%" />;
         break;
       case 'unknown_error':
         data = (
@@ -100,7 +100,7 @@ function SettingsScreen(props) {
             style={{
               fontFamily: 'OpenSans-Bold',
               color: '#343a40',
-              marginTop: '60%',
+              marginTop: '45%',
               textAlign: 'center',
             }}
           >
@@ -109,7 +109,7 @@ function SettingsScreen(props) {
         );
         break;
       default:
-        data = <Loader text="Loading profile..." marginTop="60%" />;
+        data = <Loader text="Loading profile..." marginTop="45%" />;
     }
     return data;
   };

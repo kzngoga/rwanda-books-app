@@ -6,7 +6,7 @@ export default (id) => async (dispatch) => {
     const response = await axios.post(
       `/api/v1/reads/new/${id}`,
       {},
-      configUser
+      await configUser()
     );
     const {
       data: { message },

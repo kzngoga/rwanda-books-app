@@ -1,23 +1,15 @@
-import axios, { configAdmin, configUser } from '..';
+import axios, { configUser } from '..';
 import {
   SINGLE_BOOK_SUCCESS,
   SINGLE_BOOK_FAILED,
   CLEAR_BOOK,
-  CLEAR_UPDATE_BOOK,
-  CLEAR_REMOVE_BOOK,
 } from '../../actionTypes';
 
-export default (id, type) => async (dispatch) => {
+export default (id) => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_BOOK });
-    dispatch({ type: CLEAR_UPDATE_BOOK });
-    dispatch({ type: CLEAR_REMOVE_BOOK });
-    let response;
-    if (type === 'admin') {
-      response = await axios.get(`/api/v1/admin/books/${id}`, configAdmin);
-    } else {
-      response = await axios.get(`/api/v1/books/${id}`, configUser);
-    }
+
+    const response = await axios.get(`/api/v1/books/${id}`, await configUser());
 
     const {
       data: { message, data },

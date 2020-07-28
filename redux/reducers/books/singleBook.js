@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
     case SINGLE_BOOK_FAILED:
       return { ...state, status: 'error', error: action.error };
     case CLEAR_BOOK:
-      return { ...initialState, status: 'clear' };
+      return { ...initialState, status: 'clear_fetch_book' };
     default:
       return state;
   }

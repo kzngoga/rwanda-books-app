@@ -1,20 +1,146 @@
-import React from 'react';
-import { View, SafeAreaView, Text, Linking } from 'react-native';
+import React, { useState } from 'react';
+import { View, SafeAreaView, RefreshControl } from 'react-native';
 import styled from 'styled-components';
 import { ScrollView } from 'react-native-gesture-handler';
-import Icon from '../../components/utilities/Icon';
-import Img from '../../components/usage/Img';
+import { connect } from 'react-redux';
 import Btn from '../../components/utilities/CustomButton';
-import NumberFormat from 'react-number-format';
+import SingleBook from '../../components/display/SingleBook';
+import Loader from '../../components/utilities/Loader';
+import Error from '../../components/utilities/Error';
 import { useFocusEffect } from '@react-navigation/native';
+import readBookAction from '../../redux/actions/books/readBook';
+import clearBookAction from '../../redux/actions/books/clearSingleBook';
 
-const Books = ({ addScreen, navigation }) => {
+const Books = ({
+  addScreen,
+  navigation,
+  readBookAction: readBook,
+  clearBookAction: clearBook,
+  readBook: read,
+}) => {
   const { item } = navigation.state.params;
+  const [refreshing, setRefreshing] = useState(false);
+  const [status, setStatus] = useState('initial');
   useFocusEffect(
     React.useCallback(() => {
       addScreen('Read Book');
-    }, [])
+      if (status === 'initial') {
+        readBook(item._id);
+        setStatus('fetching');
+      }
+      if (read.status === 'error') {
+        const { error } = read;
+        if (error.status === 500) {
+          setStatus('unknown_error');
+        }
+        if (error.status === 404) {
+          setStatus('no_data');
+        }
+        if (error.status === 402) {
+          setStatus('no_payment');
+        }
+      }
+      if (read.status === 'success') {
+        setStatus('success');
+      }
+
+      if (read.status === 'clear_read') {
+        setStatus('fetching');
+      }
+      setRefreshing(false);
+      return () => {
+        const isFocused = navigation.isFocused();
+        if (!isFocused) {
+          clearBook();
+        }
+      };
+    }, [read])
   );
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    readBook(item._id);
+    setStatus('fetching');
+  };
+
+  const DisplayData = ({ children }) => {
+    let data;
+    switch (status) {
+      case 'success':
+        data = <>{children}</>;
+        break;
+      case 'fetching':
+        data = (
+          <>
+            <View style={{ alignItems: 'center' }}>
+              <Loader text="Wait a Bit..." marginTop="45%" />
+            </View>
+          </>
+        );
+        break;
+      case 'no_data':
+        data = (
+          <View style={{ alignItems: 'center' }}>
+            <Error
+              desc="The book you're looking for wasn't found."
+              marginTop="45%"
+              title="No data Found!"
+              icon="book"
+            />
+          </View>
+        );
+        break;
+      case 'no_payment':
+        data = (
+          <View style={{ alignItems: 'center' }}>
+            <Error
+              desc="To Read this Book you need to first subscribe."
+              title="No Active subscription!"
+              marginTop="45%"
+              icon="subCard"
+            />
+            <Btn
+              onPress={() => {
+                requestAnimationFrame(() => {
+                  navigation.navigate('MyWebView', {
+                    title: 'Subsrciption Details',
+                    url:
+                      'http://rwanda-books.herokuapp.com/user/subscription-details',
+                  });
+                });
+              }}
+              width={180}
+              text="Subscribe"
+              color="#83bb44"
+              tColor="white"
+              padding={10}
+              marginTop={20}
+              radius={20}
+            />
+          </View>
+        );
+        break;
+      case 'unknown_error':
+        data = (
+          <View style={{ alignItems: 'center' }}>
+            <Error
+              desc="Ooops! Unexpected Error occured, pull to refresh."
+              title="Error!"
+              marginTop="45%"
+              icon="info"
+            />
+          </View>
+        );
+        break;
+      default:
+        data = (
+          <View style={{ alignItems: 'center' }}>
+            <Loader text="Wait a Bit..." marginTop="45%" />
+          </View>
+        );
+    }
+    return data;
+  };
 
   return (
     <>
@@ -25,14 +151,14 @@ const Books = ({ addScreen, navigation }) => {
           backgroundColor: '#ffffff',
         }}
       >
-        <ScrollView>
-          <View
-            style={{
-              alignItems: 'center',
-            }}
-          >
-            <Text>{item.bookTitle}</Text>
-          </View>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <DisplayData>
+            <SingleBook id={item._id} />
+          </DisplayData>
         </ScrollView>
       </View>
     </>
@@ -44,4 +170,8 @@ const Artist = styled.View`
   margin-top: 40px;
 `;
 
-export default Books;
+const mapStateToProps = ({ readBook }) => ({ readBook });
+
+export default connect(mapStateToProps, { readBookAction, clearBookAction })(
+  Books
+);
