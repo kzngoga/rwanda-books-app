@@ -4,17 +4,14 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Text,
-  StyleSheet,
-  TextInput,
   RefreshControl,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
-import CategoryCard from '../components/usage/bookCategoryCard';
+import CategoryCard from '../components/usage/BookCategoryCard';
 import Loader from '../components/utilities/Loader';
 import Error from '../components/utilities/Error';
 import { useFocusEffect } from '@react-navigation/native';
-import Book1 from '../assets/images/defaultLessons.png';
 import fetchCategoriesAction from '../redux/actions/categories/fetchCategories';
 
 const BooksScreen = ({
