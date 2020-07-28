@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
-import CategoryCard from '../components/usage/BookCategoryCard';
+import CategoryCard from '../components/usage/bookCategoryCard';
 import Loader from '../components/utilities/Loader';
 import Error from '../components/utilities/Error';
 import { useFocusEffect } from '@react-navigation/native';

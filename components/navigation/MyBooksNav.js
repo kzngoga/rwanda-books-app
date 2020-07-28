@@ -3,6 +3,7 @@ import BooksScreen from '../../views/BooksScreen';
 import AllBooks from '../../views/books/AllBooks';
 import SingleBooksScreen from '../../views/books/SingleBooksScreen';
 import CategoryBooks from '../../views/books/CategoryBooks';
+import MyWebView from '../../views/MyWebView';
 import { connect } from 'react-redux';
 import { setCurrentScreen } from '../../redux/actions/navigation/navigation';
 
@@ -36,6 +37,9 @@ function MyBooksNav({ navigation }) {
       },
       SingleBooksScreen: {
         screen: WithHeader(SingleBooksScreen),
+      },
+      MyWebView: {
+        screen: WithHeader(MyWebView),
       },
     },
     {
