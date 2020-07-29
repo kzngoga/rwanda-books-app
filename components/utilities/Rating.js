@@ -3,10 +3,6 @@ import { View } from 'react-native';
 import { AirbnbRating } from 'react-native-ratings';
 
 const StarRating = ({ ratingValue, marginTop }) => {
-  const ratingCompleted = (rating) => {
-    console.log('Rating is: ' + rating);
-  };
-
   return (
     <View style={{ marginTop: marginTop }}>
       <AirbnbRating

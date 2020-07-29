@@ -1,12 +1,20 @@
 import axios, { configUser } from '..';
-import { RATE_BOOK_SUCCESS, RATE_BOOK_FAILED } from '../../actionTypes';
+import {
+  RATE_BOOK_SUCCESS,
+  RATE_BOOK_FAILED,
+  SET_TOAST,
+  CLEAR_RATING,
+} from '../../actionTypes';
 
 export default (payload, id) => async (dispatch) => {
   try {
+    dispatch({
+      type: CLEAR_RATING,
+    });
     const response = await axios.post(
       `/api/v1/rating/add/${id}`,
       payload,
-      configUser
+      await configUser()
     );
     const {
       data: { message },
@@ -14,6 +22,10 @@ export default (payload, id) => async (dispatch) => {
     dispatch({
       type: RATE_BOOK_SUCCESS,
       message,
+    });
+    dispatch({
+      type: SET_TOAST,
+      payload: 'Book Rated Successfuly!',
     });
   } catch (err) {
     let error = {};
@@ -29,5 +41,9 @@ export default (payload, id) => async (dispatch) => {
       };
     }
     dispatch({ type: RATE_BOOK_FAILED, error });
+    dispatch({
+      type: SET_TOAST,
+      payload: 'RateError:' + ' ' + err.response.data.message,
+    });
   }
 };

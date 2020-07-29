@@ -87,3 +87,4 @@ export const SET_STACK_VALUE = 'SET_STACK_VALUE';
 export const SET_NAV_RESET = 'SET_NAV_RESET';
 export const CLEAR_TOAST = 'CLEAR_TOAST';
 export const SET_TOAST = 'SET_TOAST';
+export const CLEAR_RATING = 'CLEAR_RATING';
