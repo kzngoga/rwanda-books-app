@@ -1,4 +1,8 @@
-import { RATE_BOOK_SUCCESS, RATE_BOOK_FAILED } from '../../actionTypes';
+import {
+  RATE_BOOK_SUCCESS,
+  RATE_BOOK_FAILED,
+  CLEAR_RATING,
+} from '../../actionTypes';
 
 const initialState = {
   status: '',
@@ -15,6 +19,8 @@ export default (state = initialState, action) => {
       };
     case RATE_BOOK_FAILED:
       return { ...state, status: 'error', error: action.error };
+    case CLEAR_RATING:
+      return { ...initialState, status: 'clear_rating' };
     default:
       return state;
   }

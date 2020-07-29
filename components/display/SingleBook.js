@@ -24,7 +24,6 @@ const Books = ({
 }) => {
   const [bookData, setBookData] = useState({});
   const [status, setStatus] = useState('initial');
-  const [errorFav, setErrorFav] = useState('');
   const [saveBtn, setSaveBtn] = useState(false);
   const [submiting, setSubmiting] = useState(false);
 
@@ -58,7 +57,6 @@ const Books = ({
         setSubmiting(false);
       }
       if (favorites.status === 'error') {
-        setErrorFav(favorites.error.message);
         setSubmiting(false);
       }
     }, [getBook, favorites])
@@ -198,7 +196,7 @@ const Books = ({
             }}
           >
             <View style={{ flex: 1, alignItems: 'center' }}>
-              <View style={{ flexDirection: 'column' }}>
+              <View style={{ flexDirection: 'column', marginTop: 5 }}>
                 <Text
                   style={{ textAlign: 'center', fontFamily: 'OpenSans-Bold' }}
                 >
@@ -212,14 +210,11 @@ const Books = ({
               </View>
             </View>
             <View style={{ flex: 3 }}>
-              <View style={{ flexDirection: 'column' }}>
-                <Text
-                  style={{ textAlign: 'center', fontFamily: 'OpenSans-Bold' }}
-                >
-                  Rate Book
-                </Text>
-                <StarRating ratingValue={2} marginTop={4} />
-              </View>
+              <StarRating
+                marginTop={4}
+                isRated={bookData.isRated}
+                bookId={id}
+              />
             </View>
             <View style={{ flex: 3 }}>
               {submiting ? (
@@ -234,7 +229,7 @@ const Books = ({
                   marginTop={0}
                   radius={5}
                 />
-              ) : getBook.results.isFav || saveBtn ? (
+              ) : bookData.isFav || saveBtn ? (
                 <IconButton
                   width={143}
                   text="Favorite"

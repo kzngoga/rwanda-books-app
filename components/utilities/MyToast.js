@@ -19,7 +19,7 @@ const MyToast = ({ toast, clearToast: clear }) => {
     }).start(() =>
       setTimeout(() => {
         fadeOut();
-      }, 2000)
+      }, 2200)
     );
   };
 
