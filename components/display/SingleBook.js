@@ -2,20 +2,32 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import Icon from '../utilities/Icon';
+import MyToast from '../utilities/MyToast';
 import Img from '../usage/BookImg';
 import Btn from '../utilities/CustomButton';
+import LoaderButton from '../utilities/LoaderButton';
 import IconButton from '../utilities/IconButton';
 import StarRating from '../utilities/StarRating';
 import generateReads from '../../helpers/generateReads';
 import { useFocusEffect } from '@react-navigation/native';
 import singleBookAction from '../../redux/actions/books/singleBook';
+import addFavoritesAction from '../../redux/actions/favorites/addFavorites';
 import Loader from '../utilities/Loader';
 import Error from '../utilities/Error';
 
-const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
+const Books = ({
+  singleBook: getBook,
+  singleBookAction: singleBook,
+  id,
+  addFavoritesAction: addFavorites,
+  addFavorites: favorites,
+}) => {
   const [bookData, setBookData] = useState({});
   const [status, setStatus] = useState('initial');
+  const [errorFav, setErrorFav] = useState('');
+  const [saveBtn, setSaveBtn] = useState(false);
+  const [submiting, setSubmiting] = useState(false);
+
   useFocusEffect(
     React.useCallback(() => {
       if (getBook.status === 'clear_fetch_book') {
@@ -39,8 +51,23 @@ const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
         setStatus('success');
         setBookData(getBook.results.book);
       }
-    }, [getBook])
+
+      // Add To Favorites
+      if (favorites.status === 'success') {
+        setSaveBtn(true);
+        setSubmiting(false);
+      }
+      if (favorites.status === 'error') {
+        setErrorFav(favorites.error.message);
+        setSubmiting(false);
+      }
+    }, [getBook, favorites])
   );
+
+  const handleAddToFav = () => {
+    addFavorites(id);
+    return setSubmiting(true);
+  };
 
   const DisplayData = ({ children }) => {
     let data;
@@ -52,7 +79,7 @@ const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
         data = (
           <>
             <View style={{ alignItems: 'center' }}>
-              <Loader text="Loading Book..." marginTop="45%" />
+              <Loader text="Loading Book..." marginTop="55%" />
             </View>
           </>
         );
@@ -62,7 +89,7 @@ const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
           <View style={{ alignItems: 'center' }}>
             <Error
               desc="The book you're looking for wasn't found."
-              marginTop="45%"
+              marginTop="55%"
               title="No data Found!"
               icon="book"
             />
@@ -75,7 +102,7 @@ const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
             <Error
               desc="Ooops! Unexpected Error occured, pull to refresh."
               title="Error!"
-              marginTop="45%"
+              marginTop="55%"
               icon="info"
             />
           </View>
@@ -84,7 +111,7 @@ const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
       default:
         data = (
           <View style={{ alignItems: 'center' }}>
-            <Loader text="Loading Book..." marginTop="45%" />
+            <Loader text="Loading Book..." marginTop="55%" />
           </View>
         );
     }
@@ -99,6 +126,7 @@ const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
           backgroundColor: '#ffffff',
         }}
       >
+        <MyToast />
         <DisplayData>
           <Artist>
             <Img
@@ -194,9 +222,21 @@ const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
               </View>
             </View>
             <View style={{ flex: 3 }}>
-              {getBook.results.isFav ? (
+              {submiting ? (
+                <LoaderButton
+                  width={143}
+                  fontSize={15}
+                  loaderColor="#ffffff"
+                  color="#8c8c8c"
+                  disabledColor="#8c8c8c"
+                  padding={10}
+                  loaderSize="small"
+                  marginTop={0}
+                  radius={5}
+                />
+              ) : getBook.results.isFav || saveBtn ? (
                 <IconButton
-                  width={145}
+                  width={143}
                   text="Favorite"
                   color="#83bb44"
                   disabledColor="#8c8c8c"
@@ -208,13 +248,14 @@ const Books = ({ singleBook: getBook, singleBookAction: singleBook, id }) => {
                 />
               ) : (
                 <Btn
-                  width={145}
+                  width={143}
                   text="Add To Favorites"
                   color="#83bb44"
                   tColor="white"
                   padding={10}
                   marginTop={0}
                   radius={5}
+                  onPress={handleAddToFav}
                 />
               )}
             </View>
@@ -242,6 +283,12 @@ const Artist = styled.View`
   margin-top: 40px;
 `;
 
-const mapStateToProps = ({ singleBook }) => ({ singleBook });
+const mapStateToProps = ({ singleBook, addFavorites }) => ({
+  singleBook,
+  addFavorites,
+});
 
-export default connect(mapStateToProps, { singleBookAction })(Books);
+export default connect(mapStateToProps, {
+  singleBookAction,
+  addFavoritesAction,
+})(Books);

@@ -2,6 +2,7 @@ import axios, { configUser } from '..';
 import {
   ADD_TO_FAVORITES_SUCCESS,
   ADD_TO_FAVORITES_FAILED,
+  SET_TOAST,
 } from '../../actionTypes';
 
 export default (id) => async (dispatch) => {
@@ -9,7 +10,7 @@ export default (id) => async (dispatch) => {
     const response = await axios.put(
       `/api/v1/favorites/add/${id}`,
       {},
-      configUser
+      await configUser()
     );
     const {
       data: { message, data },
@@ -19,6 +20,7 @@ export default (id) => async (dispatch) => {
       message,
       results: data,
     });
+    dispatch({ type: SET_TOAST, payload: 'Book Added to favorites!' });
   } catch (err) {
     let error = {};
     if (err.response) {
@@ -33,5 +35,9 @@ export default (id) => async (dispatch) => {
       };
     }
     dispatch({ type: ADD_TO_FAVORITES_FAILED, error });
+    dispatch({
+      type: SET_TOAST,
+      payload: 'FavError:' + ' ' + err.response.data.message,
+    });
   }
 };

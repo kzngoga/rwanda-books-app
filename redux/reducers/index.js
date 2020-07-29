@@ -8,6 +8,7 @@ import types from './types';
 import lessons from './lessons';
 import categories from './categories';
 import navigation from './navigation';
+import toast from './toast';
 
 export default combineReducers({
   ...books,
@@ -18,4 +19,5 @@ export default combineReducers({
   ...lessons,
   ...categories,
   ...navigation,
+  ...toast,
 });
