@@ -85,3 +85,5 @@ export const PUSH_NAVIGATION = 'PUSH_NAVIGATION';
 export const POP_NAVIGATION = 'POP_NAVIGATION';
 export const SET_STACK_VALUE = 'SET_STACK_VALUE';
 export const SET_NAV_RESET = 'SET_NAV_RESET';
+export const CLEAR_TOAST = 'CLEAR_TOAST';
+export const SET_TOAST = 'SET_TOAST';

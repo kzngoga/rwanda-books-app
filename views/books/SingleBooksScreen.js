@@ -73,7 +73,7 @@ const Books = ({
         data = (
           <>
             <View style={{ alignItems: 'center' }}>
-              <Loader text="Wait a Bit..." marginTop="45%" />
+              <Loader text="Wait a Bit..." marginTop="55%" />
             </View>
           </>
         );
@@ -83,7 +83,7 @@ const Books = ({
           <View style={{ alignItems: 'center' }}>
             <Error
               desc="The book you're looking for wasn't found."
-              marginTop="45%"
+              marginTop="55%"
               title="No data Found!"
               icon="book"
             />
@@ -96,7 +96,7 @@ const Books = ({
             <Error
               desc="To Read this Book you need to first subscribe."
               title="No Active subscription!"
-              marginTop="45%"
+              marginTop="55%"
               icon="subCard"
             />
             <Btn
@@ -126,7 +126,7 @@ const Books = ({
             <Error
               desc="Ooops! Unexpected Error occured, pull to refresh."
               title="Error!"
-              marginTop="45%"
+              marginTop="55%"
               icon="info"
             />
           </View>
@@ -135,7 +135,7 @@ const Books = ({
       default:
         data = (
           <View style={{ alignItems: 'center' }}>
-            <Loader text="Wait a Bit..." marginTop="45%" />
+            <Loader text="Wait a Bit..." marginTop="55%" />
           </View>
         );
     }

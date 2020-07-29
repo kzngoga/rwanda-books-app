@@ -93,7 +93,7 @@ const Books = ({
               title="No Data Found!"
               desc="No books added to the database yet."
               icon="book-open"
-              marginTop="45%"
+              marginTop="55%"
             />
           </View>
         );
@@ -110,7 +110,7 @@ const Books = ({
               title="Error!"
               desc="Ooops! Unexpected Error occured, pull to refresh."
               icon="info"
-              marginTop="45%"
+              marginTop="55%"
             />
           </View>
         );
@@ -125,7 +125,7 @@ const Books = ({
               paddingHorizontal: 10,
             }}
           >
-            <Loader text="Loading books..." marginTop="45%" />
+            <Loader text="Loading books..." marginTop="55%" />
           </View>
         );
       } else {
