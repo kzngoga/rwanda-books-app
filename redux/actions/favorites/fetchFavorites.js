@@ -10,8 +10,7 @@ export default () => async (dispatch) => {
   try {
     dispatch({ type: CLEAR_FAVORITES });
     dispatch({ type: CLEAR_REMOVE_FAVORITES });
-
-    const response = await axios.get('/api/v1/favorites', configUser);
+    const response = await axios.get('/api/v1/favorites', await configUser());
 
     const {
       data: { message, data },

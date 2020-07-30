@@ -135,7 +135,15 @@ const BooksScreen = ({
             >
               <CategoryCard title="All Books" type="all" />
             </TouchableOpacity>
-            <CategoryCard title="Favorite Books" type="fav" />
+            <TouchableOpacity
+              onPress={() => {
+                requestAnimationFrame(() => {
+                  navigate('FavoritesScreen');
+                });
+              }}
+            >
+              <CategoryCard title="Favorite Books" type="fav" />
+            </TouchableOpacity>
           </View>
 
           {/* Category Books */}

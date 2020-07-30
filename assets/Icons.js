@@ -96,7 +96,7 @@ export default {
         height={19.285}
         rx={0.964}
         transform="rotate(-45 .222 1.585)"
-        fill="#fff"
+        fill={color}
       />
       <Rect
         x={1.585}
@@ -105,7 +105,7 @@ export default {
         height={19.285}
         rx={0.964}
         transform="rotate(-135 1.585 15.222)"
-        fill="#fff"
+        fill={color}
       />
     </Svg>
   ),

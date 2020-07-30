@@ -9,7 +9,7 @@ export default (id) => async (dispatch) => {
     const response = await axios.patch(
       `/api/v1/favorites/remove/${id}`,
       {},
-      configUser
+      await configUser()
     );
 
     const {
