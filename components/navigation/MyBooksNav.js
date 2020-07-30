@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import BooksScreen from '../../views/BooksScreen';
 import AllBooks from '../../views/books/AllBooks';
+import FavoritesScreen from '../../views/books/FavoritesScreen';
 import SingleBooksScreen from '../../views/books/SingleBooksScreen';
 import CategoryBooks from '../../views/books/CategoryBooks';
 import MyWebView from '../../views/MyWebView';
@@ -34,6 +35,9 @@ function MyBooksNav({ navigation }) {
       },
       CategoryBooksScreen: {
         screen: WithHeader(CategoryBooks),
+      },
+      FavoritesScreen: {
+        screen: WithHeader(FavoritesScreen),
       },
       SingleBooksScreen: {
         screen: WithHeader(SingleBooksScreen),
