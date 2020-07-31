@@ -214,12 +214,28 @@ const BooksScreen = ({
                 marginTop: 12,
               }}
             >
-              <CategoryCard title="Popular Books" type="popular" />
-              <CategoryCard title="New Books" type="new" />
+              <TouchableOpacity
+                onPress={() => {
+                  requestAnimationFrame(() => {
+                    navigate('NewBooksScreen');
+                  });
+                }}
+              >
+                <CategoryCard title="New Books" type="new" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  requestAnimationFrame(() => {
+                    navigate('PopularBooksScreen');
+                  });
+                }}
+              >
+                <CategoryCard title="Popular Books" type="popular" />
+              </TouchableOpacity>
             </View>
           </View>
 
-          {/* Popular & New Books */}
+          {/* Paid & Free Books */}
           <View style={{ marginBottom: 20 }}>
             <Text
               style={{

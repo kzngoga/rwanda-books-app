@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { View } from 'react-native';
 import Img from './BookImg';
 import Rating from '../utilities/Rating';
+import generateReads from '../../helpers/generateReads';
 import displayBookDate from '../../helpers/displayBookDate';
 
 export default function LessonCard(props) {
@@ -22,7 +23,13 @@ export default function LessonCard(props) {
         style={{ height: 100, width: 100, borderRadius: 10 }}
       />
       <Title numberOfLines={1}>{props.title}</Title>
-      <Artist numberOfLines={1}>{displayBookDate(props.released)}</Artist>
+      {props.type === 'popular' ? (
+        <Artist numberOfLines={1}>{`${generateReads(
+          props.reads
+        )} Reads`}</Artist>
+      ) : (
+        <Artist numberOfLines={1}>{displayBookDate(props.released)}</Artist>
+      )}
       <Rating ratingValue={props.rating} marginTop={props.marginTop} />
     </View>
   );

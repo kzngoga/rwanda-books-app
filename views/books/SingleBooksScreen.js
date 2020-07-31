@@ -18,14 +18,21 @@ const Books = ({
   clearBookAction: clearBook,
   readBook: read,
 }) => {
-  const { item } = navigation.state.params;
+  const { item, type } = navigation.state.params;
+  let bookId;
+  if (type === 'popular') {
+    bookId = item._id.Book;
+  } else {
+    bookId = item._id;
+  }
+
   const [refreshing, setRefreshing] = useState(false);
   const [status, setStatus] = useState('initial');
   useFocusEffect(
     React.useCallback(() => {
       addScreen('Read Book');
       if (status === 'initial') {
-        readBook(item._id);
+        readBook(bookId);
         setStatus('fetching');
       }
       if (read.status === 'error') {
@@ -59,7 +66,7 @@ const Books = ({
 
   const onRefresh = () => {
     setRefreshing(true);
-    readBook(item._id);
+    readBook(bookId);
     setStatus('fetching');
   };
 
@@ -157,7 +164,7 @@ const Books = ({
           }
         >
           <DisplayData>
-            <SingleBook id={item._id} />
+            <SingleBook id={bookId} />
           </DisplayData>
         </ScrollView>
       </View>
