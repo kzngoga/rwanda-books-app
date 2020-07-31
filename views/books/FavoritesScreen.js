@@ -96,7 +96,7 @@ const Books = ({
               desc="Your favorite Books will appear here."
               marginTop="45%"
               title="No data Found!"
-              icon="book-star"
+              icon="book-open"
             />
           </View>
         );

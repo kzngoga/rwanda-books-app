@@ -1,26 +1,149 @@
 import React, { useState } from 'react';
-import { View, SafeAreaView, Text, RefreshControl } from 'react-native';
-import styled from 'styled-components';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+  View,
+  SafeAreaView,
+  RefreshControl,
+  TouchableOpacity,
+} from 'react-native';
+import { ScrollView, FlatList } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+import BookCard from '../../components/usage/BookCard';
+import Loader from '../../components/utilities/Loader';
+import Error from '../../components/utilities/Error';
+import searchBookAction from '../../redux/actions/books/searchBook';
 
 import { useFocusEffect } from '@react-navigation/native';
 
-const LessonsScreen = ({ addScreen, navigation }) => {
+const Books = ({
+  addScreen,
+  navigation,
+  searchBookAction: searchBook,
+  searchBook: getBooks,
+}) => {
   const [refreshing, setRefreshing] = useState(false);
-  const [status, setStatus] = useState('initial');
-
+  const [errorStatus, setErrorStatus] = useState('');
+  const [booksData, setBooksData] = useState([]);
+  const [fetchMore, setFetchMore] = useState(false);
+  const [bookPage, setBookPage] = useState(1);
+  const [allBooksLoaded, setAllBooksLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [initiated, setInitiated] = useState(false);
   const { category } = navigation.state.params;
 
   useFocusEffect(
     React.useCallback(() => {
       addScreen(category || 'Category Books');
+      if (!initiated) {
+        searchBook('category', category, bookPage);
+        setLoading(true);
+        setInitiated(true);
+      }
+
+      if (loading && getBooks.status === 'error') {
+        const { error } = getBooks;
+        if (error.status === 404) {
+          setAllBooksLoaded(true);
+        }
+
+        if (error.status === 500) {
+          setFetchMore(false);
+        }
+        setLoading(false);
+        setErrorStatus(getBooks.error.status);
+        setFetchMore(false);
+      }
+
+      if (loading && getBooks.status === 'success') {
+        setBooksData([...booksData, ...getBooks.results]);
+        setLoading(true);
+        setFetchMore(false);
+      }
+
       setRefreshing(false);
-    }, [])
+    }, [getBooks])
   );
 
   const onRefresh = () => {
     setRefreshing(true);
-    setStatus('fetching');
+    searchBook('category', category, 1);
+    setBooksData([]);
+  };
+
+  const loadMore = () => {
+    if (!allBooksLoaded) {
+      searchBook('category', category, bookPage + 1);
+      setBookPage(bookPage + 1);
+      setFetchMore(true);
+    }
+  };
+
+  const DisplayData = ({ children }) => {
+    let data;
+    if (errorStatus && bookPage === 1) {
+      if (errorStatus === 404) {
+        data = (
+          <View
+            style={{
+              marginTop: 20,
+              alignItems: 'center',
+              paddingHorizontal: 10,
+            }}
+          >
+            <Error
+              title="No Data Found!"
+              desc={`No books added to the ${category} yet.`}
+              icon="book-open"
+              marginTop="55%"
+            />
+          </View>
+        );
+      } else {
+        data = (
+          <View
+            style={{
+              marginTop: 20,
+              alignItems: 'center',
+              paddingHorizontal: 10,
+            }}
+          >
+            <Error
+              title="Error!"
+              desc="Ooops! Unexpected Error occured, pull to refresh."
+              icon="info"
+              marginTop="55%"
+            />
+          </View>
+        );
+      }
+    } else {
+      if (booksData.length === 0) {
+        data = (
+          <View
+            style={{
+              marginTop: 20,
+              alignItems: 'center',
+              paddingHorizontal: 10,
+            }}
+          >
+            <Loader text={`${category} books...`} marginTop="55%" />
+          </View>
+        );
+      } else {
+        data = (
+          <>
+            <View
+              style={{
+                marginTop: 20,
+                paddingHorizontal: 10,
+              }}
+            >
+              {children}
+            </View>
+          </>
+        );
+      }
+    }
+    return data;
   };
 
   return (
@@ -37,18 +160,49 @@ const LessonsScreen = ({ addScreen, navigation }) => {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         >
-          <View>
-            <Text>{category} Books</Text>
-          </View>
+          <DisplayData>
+            <FlatList
+              keyExtractor={(item) => {
+                item._id;
+              }}
+              numColumns={3}
+              initialNumToRender={9}
+              horizontal={false}
+              data={booksData}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      requestAnimationFrame(() => {
+                        navigation.navigate('SingleBooksScreen', { item });
+                      });
+                    }}
+                  >
+                    <BookCard
+                      title={item.bookTitle}
+                      released={item.released}
+                      rating={item.rating}
+                      marginTop={2}
+                      img={item.bookPicture}
+                    />
+                  </TouchableOpacity>
+                );
+              }}
+              ListFooterComponent={() =>
+                allBooksLoaded ? null : (
+                  <Loader text="Loading more..." marginTop="3%" />
+                )
+              }
+              onEndReached={() => loadMore()}
+              onEndReachedThreshold={0.3}
+            />
+          </DisplayData>
         </ScrollView>
       </View>
     </>
   );
 };
 
-const Artist = styled.View`
-  align-items: center;
-  margin-top: 40px;
-`;
+const mapStateToProps = ({ searchBook }) => ({ searchBook });
 
-export default LessonsScreen;
+export default connect(mapStateToProps, { searchBookAction })(Books);
