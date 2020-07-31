@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import BooksScreen from '../../views/BooksScreen';
 import AllBooks from '../../views/books/AllBooks';
+import NewBooks from '../../views/books/NewBooks';
+import PopularBooks from '../../views/books/PopularBooks';
 import FavoritesScreen from '../../views/books/FavoritesScreen';
 import SingleBooksScreen from '../../views/books/SingleBooksScreen';
 import CategoryBooks from '../../views/books/CategoryBooks';
@@ -38,6 +40,12 @@ function MyBooksNav({ navigation }) {
       },
       FavoritesScreen: {
         screen: WithHeader(FavoritesScreen),
+      },
+      NewBooksScreen: {
+        screen: WithHeader(NewBooks),
+      },
+      PopularBooksScreen: {
+        screen: WithHeader(PopularBooks),
       },
       SingleBooksScreen: {
         screen: WithHeader(SingleBooksScreen),

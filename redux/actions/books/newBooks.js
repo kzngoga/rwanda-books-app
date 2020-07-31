@@ -8,7 +8,7 @@ export default (page) => async (dispatch) => {
   try {
     const response = await axios.get(
       `/api/v1/books/new-releases?page=${page}&limit=8`,
-      configUser
+      await configUser()
     );
 
     const {
