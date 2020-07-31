@@ -10,15 +10,15 @@ import { connect } from 'react-redux';
 import BookCard from '../../components/usage/BookCard';
 import Loader from '../../components/utilities/Loader';
 import Error from '../../components/utilities/Error';
-import popularBooksAction from '../../redux/actions/books/popularBooks';
+import searchBookAction from '../../redux/actions/books/searchBook';
 
 import { useFocusEffect } from '@react-navigation/native';
 
 const Books = ({
   addScreen,
-  navigation: { navigate },
-  popularBooksAction: popularBooks,
-  popularBooks: getBooks,
+  navigation,
+  searchBookAction: searchBook,
+  searchBook: getBooks,
 }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [errorStatus, setErrorStatus] = useState('');
@@ -28,16 +28,16 @@ const Books = ({
   const [allBooksLoaded, setAllBooksLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [initiated, setInitiated] = useState(false);
+  const { category } = navigation.state.params;
 
   useFocusEffect(
     React.useCallback(() => {
-      addScreen('Popular Books');
+      addScreen(category + ' ' + 'Books' || 'Cost Books');
       if (!initiated) {
-        popularBooks(bookPage);
+        searchBook('availability', category, bookPage);
         setLoading(true);
         setInitiated(true);
       }
-
       if (loading && getBooks.status === 'error') {
         const { error } = getBooks;
         if (error.status === 404) {
@@ -53,7 +53,7 @@ const Books = ({
       }
 
       if (loading && getBooks.status === 'success') {
-        setBooksData([...booksData, ...getBooks.results.books]);
+        setBooksData([...booksData, ...getBooks.results]);
         setLoading(true);
         setFetchMore(false);
       }
@@ -64,7 +64,7 @@ const Books = ({
 
   const loadMore = () => {
     if (!allBooksLoaded) {
-      popularBooks(bookPage + 1);
+      searchBook('availability', category, bookPage + 1);
       setBookPage(bookPage + 1);
       setFetchMore(true);
     }
@@ -84,7 +84,7 @@ const Books = ({
           >
             <Error
               title="No Data Found!"
-              desc="No popular books retrieved for now."
+              desc={`No ${category} books added to the database yet.`}
               icon="book"
               marginTop="55%"
             />
@@ -118,7 +118,7 @@ const Books = ({
               paddingHorizontal: 10,
             }}
           >
-            <Loader text="Popular books..." marginTop="55%" />
+            <Loader text={`${category} books...`} marginTop="55%" />
           </View>
         );
       } else {
@@ -152,7 +152,7 @@ const Books = ({
           <DisplayData>
             <FlatList
               keyExtractor={(item) => {
-                item._id.Book;
+                item._id;
               }}
               numColumns={3}
               initialNumToRender={9}
@@ -163,21 +163,16 @@ const Books = ({
                   <TouchableOpacity
                     onPress={() => {
                       requestAnimationFrame(() => {
-                        navigate('SingleBooksScreen', {
-                          item,
-                          type: 'popular',
-                        });
+                        navigation.navigate('SingleBooksScreen', { item });
                       });
                     }}
                   >
                     <BookCard
-                      title={item.title}
+                      title={item.bookTitle}
                       released={item.released}
-                      type="popular"
                       rating={item.rating}
                       marginTop={2}
-                      img={item.picture}
-                      reads={item.allTimeReads}
+                      img={item.bookPicture}
                     />
                   </TouchableOpacity>
                 );
@@ -199,6 +194,6 @@ const Books = ({
   );
 };
 
-const mapStateToProps = ({ popularBooks }) => ({ popularBooks });
+const mapStateToProps = ({ searchBook }) => ({ searchBook });
 
-export default connect(mapStateToProps, { popularBooksAction })(Books);
+export default connect(mapStateToProps, { searchBookAction })(Books);

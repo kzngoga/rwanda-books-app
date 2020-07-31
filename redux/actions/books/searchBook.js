@@ -10,7 +10,7 @@ export default (searchTerm, query, page) => async (dispatch) => {
     dispatch({ type: CLEAR_SEARCH });
 
     const response = await axios.get(
-      `/api/v1/search/${searchTerm}?q=${query}&page=${page}&limit=8`
+      `/api/v1/search/${searchTerm}?q=${query}&page=${page}&limit=12`
     );
 
     const {

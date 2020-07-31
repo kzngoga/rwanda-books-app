@@ -10,7 +10,7 @@ export default (page) => async (dispatch) => {
     dispatch({ type: CLEAR_FETCH_CATEGORY });
 
     const response = await axios.get(
-      `/api/v1/books/all?page=${page}&limit=6`,
+      `/api/v1/books/all?page=${page}&limit=12`,
       await configUser()
     );
 

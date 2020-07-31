@@ -4,7 +4,7 @@ import { FETCH_POPULAR_SUCCESS, FETCH_POPULAR_FAILED } from '../../actionTypes';
 export default (page) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `/api/v1/books/popular-books?page=${page}&limit=8`
+      `/api/v1/books/popular-books?page=${page}&limit=12`
     );
 
     const {

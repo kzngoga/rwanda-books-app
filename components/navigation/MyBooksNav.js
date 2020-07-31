@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import BooksScreen from '../../views/BooksScreen';
 import AllBooks from '../../views/books/AllBooks';
 import NewBooks from '../../views/books/NewBooks';
+import CostBooks from '../../views/books/CostBooks';
 import PopularBooks from '../../views/books/PopularBooks';
 import FavoritesScreen from '../../views/books/FavoritesScreen';
 import SingleBooksScreen from '../../views/books/SingleBooksScreen';
@@ -46,6 +47,9 @@ function MyBooksNav({ navigation }) {
       },
       PopularBooksScreen: {
         screen: WithHeader(PopularBooks),
+      },
+      CostBooksScreen: {
+        screen: WithHeader(CostBooks),
       },
       SingleBooksScreen: {
         screen: WithHeader(SingleBooksScreen),
