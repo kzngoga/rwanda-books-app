@@ -255,8 +255,28 @@ const BooksScreen = ({
                 marginTop: 12,
               }}
             >
-              <CategoryCard title="Paid Books" type="paid" />
-              <CategoryCard title="Free Books" type="free" />
+              <TouchableOpacity
+                onPress={() => {
+                  requestAnimationFrame(() => {
+                    navigate('CostBooksScreen', {
+                      category: 'Paid',
+                    });
+                  });
+                }}
+              >
+                <CategoryCard title="Paid Books" type="paid" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  requestAnimationFrame(() => {
+                    navigate('CostBooksScreen', {
+                      category: 'Free',
+                    });
+                  });
+                }}
+              >
+                <CategoryCard title="Free Books" type="free" />
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>

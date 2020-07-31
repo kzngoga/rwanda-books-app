@@ -63,12 +63,6 @@ const Books = ({
     }, [getBooks])
   );
 
-  const onRefresh = () => {
-    setRefreshing(true);
-    categoryBooks(1);
-    setBooksData([]);
-  };
-
   const loadMore = () => {
     if (!allBooksLoaded) {
       categoryBooks(bookPage + 1);
@@ -92,7 +86,7 @@ const Books = ({
             <Error
               title="No Data Found!"
               desc="No books added to the database yet."
-              icon="book-open"
+              icon="book"
               marginTop="55%"
             />
           </View>
@@ -108,7 +102,7 @@ const Books = ({
           >
             <Error
               title="Error!"
-              desc="Ooops! Unexpected Error occured, pull to refresh."
+              desc="Ooops! Your internet connection is slow, please try again later."
               icon="info"
               marginTop="55%"
             />
@@ -155,11 +149,7 @@ const Books = ({
           backgroundColor: '#ffffff',
         }}
       >
-        <ScrollView
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        >
+        <ScrollView>
           <DisplayData>
             <FlatList
               keyExtractor={(item) => {
@@ -190,7 +180,9 @@ const Books = ({
               }}
               ListFooterComponent={() =>
                 allBooksLoaded ? null : (
-                  <Loader text="Loading more..." marginTop="3%" />
+                  <View style={{ marginBottom: 20 }}>
+                    <Loader text="Loading more..." marginTop="3%" />
+                  </View>
                 )
               }
               onEndReached={() => loadMore()}

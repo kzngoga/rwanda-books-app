@@ -93,10 +93,10 @@ const Books = ({
         data = (
           <View style={{ alignItems: 'center' }}>
             <Error
-              desc="Your favorite Books will appear here."
+              desc="Your Favorite books will appear here."
+              title="No Data Found!"
               marginTop="45%"
-              title="No data Found!"
-              icon="book-open"
+              icon="book"
             />
           </View>
         );
@@ -161,6 +161,7 @@ const Books = ({
             />
           </View>
           <DisplayData>
+            <Text>Books</Text>
             <FlatList
               keyExtractor={(item) => {
                 item._id;
