@@ -156,7 +156,7 @@ const Books = ({
                 item._id;
               }}
               numColumns={3}
-              initialNumToRender={9}
+              initialNumToRender={12}
               horizontal={false}
               data={booksData}
               renderItem={({ item }) => {

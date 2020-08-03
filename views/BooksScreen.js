@@ -22,7 +22,7 @@ const BooksScreen = ({
 }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [status, setStatus] = useState('initial');
-  const [categoriesData, setCategoriesData] = useState('initial');
+  const [categoriesData, setCategoriesData] = useState([]);
 
   useFocusEffect(
     React.useCallback(() => {

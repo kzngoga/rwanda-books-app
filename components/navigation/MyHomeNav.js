@@ -4,7 +4,12 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 
 import WithHeader from './WithHeader';
+import WithHomeHeader from './WithHomeHeader';
 import HomeScreen from '../../views/HomeScreen';
+import NewBooks from '../../views/books/NewBooks';
+import PopularBooks from '../../views/books/PopularBooks';
+import SingleBooksScreen from '../../views/books/SingleBooksScreen';
+import MyWebView from '../../views/MyWebView';
 
 function MyHomeNav({ navigation }) {
   useEffect(() => {
@@ -21,7 +26,19 @@ function MyHomeNav({ navigation }) {
   const HomeStack = createStackNavigator(
     {
       HomeScreen: {
-        screen: WithHeader(HomeScreen),
+        screen: WithHomeHeader(HomeScreen),
+      },
+      NewBooksScreen: {
+        screen: WithHeader(NewBooks),
+      },
+      PopularBooksScreen: {
+        screen: WithHeader(PopularBooks),
+      },
+      SingleBooksScreen: {
+        screen: WithHeader(SingleBooksScreen),
+      },
+      MyWebView: {
+        screen: WithHeader(MyWebView),
       },
     },
     {

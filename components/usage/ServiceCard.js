@@ -22,11 +22,7 @@ export default function LessonCard(props) {
           borderRadius: 10,
         }}
       />
-      {props.font === 'bold-type' ? (
-        <TitleBold numberOfLines={1}>{props.title}</TitleBold>
-      ) : (
-        <Title numberOfLines={1}>{props.title}</Title>
-      )}
+      <Title numberOfLines={1}>{props.title}</Title>
     </View>
   );
 }
@@ -38,10 +34,10 @@ const Title = styled.Text`
   padding-top: 5px;
   font-size: 14px;
 `;
-const TitleBold = styled.Text`
-  color: #343a40;
-  font-family: 'OpenSans-Bold';
+
+const Artist = styled.Text`
+  color: #c4c4c4;
+  font-family: 'OpenSans-Regular';
   text-align: center;
-  padding-top: 5px;
-  font-size: 14px;
+  font-size: 10px;
 `;

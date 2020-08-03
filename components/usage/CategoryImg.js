@@ -25,6 +25,18 @@ export default function Img(props) {
   if (props.type === 'free') {
     image = require('../../assets/images/freeBook.png');
   }
+  if (props.type === 'globe') {
+    image = require('../../assets/images/africa.png');
+  }
+  if (props.type === 'bulb') {
+    image = require('../../assets/images/light-bulb.png');
+  }
+  if (props.type === 'percentage') {
+    image = require('../../assets/images/percentage.png');
+  }
+  if (props.type === 'like') {
+    image = require('../../assets/images/thumbs-up.png');
+  }
   return (
     <>
       <Image source={image} {...props} />
