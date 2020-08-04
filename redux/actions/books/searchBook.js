@@ -21,6 +21,7 @@ export default (searchTerm, query, page) => async (dispatch) => {
       message,
       results: data,
     });
+
   } catch (err) {
     let error = {};
     if (err.response) {
@@ -35,5 +36,6 @@ export default (searchTerm, query, page) => async (dispatch) => {
       };
     }
     dispatch({ type: SEARCH_BOOKS_FAILED, error });
+
   }
 };
