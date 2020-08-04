@@ -2,16 +2,13 @@
 import React, { useEffect } from 'react';
 
 import SearchScreen from '../../views/SearchScreen';
+import SingleBooksScreen from '../../views/books/SingleBooksScreen';
 import { connect } from 'react-redux';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import WithHeader from './WithHeader';
 
 function MySearchNav({ navigation, link }) {
-  // useEffect(() => {
-  //   if (link.deepLink) navigation.navigate('Home');
-  // }, [link]);
-
   useEffect(() => {
     const unsubscribe = navigation.addListener('tabPress', (e) => {
       let hist = navigation.dangerouslyGetState().history;
@@ -27,6 +24,9 @@ function MySearchNav({ navigation, link }) {
     {
       SearchScreen: {
         screen: WithHeader(SearchScreen),
+      },
+      SingleBooksScreen: {
+        screen: WithHeader(SingleBooksScreen),
       },
     },
     {
