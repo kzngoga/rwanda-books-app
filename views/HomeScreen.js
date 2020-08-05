@@ -32,10 +32,10 @@ const HomeScreen = ({
   const [newBooksData, setNewBooksData] = useState([]);
 
   const serviceData = [
-    { _id: 1, title: '100% Safe', type: 'percentage' },
-    { _id: 1, title: 'Learn Now', type: 'bulb' },
-    { _id: 1, title: 'Good Quality', type: 'like' },
-    { _id: 1, title: 'Learn Kinya', type: 'globe' },
+    { _id: 'servType1', title: '100% Safe', type: 'percentage' },
+    { _id: 'servType2', title: 'Learn Now', type: 'bulb' },
+    { _id: 'servType3', title: 'Good Quality', type: 'like' },
+    { _id: 'servType4', title: 'Learn Kinya', type: 'globe' },
   ];
   useFocusEffect(
     React.useCallback(() => {
@@ -48,6 +48,8 @@ const HomeScreen = ({
         popularBooks(1);
         setPopularStatus('fetching');
       }
+
+      // New Books
       if (getNewBooks.status === 'error') {
         const { error } = getNewBooks;
         if (error.status === 500) {
@@ -287,7 +289,7 @@ const HomeScreen = ({
               }}
             >
               <FlatList
-                keyExtractor={(item) => {
+                keyExtractor={(item, index) => {
                   item._id;
                 }}
                 horizontal={true}

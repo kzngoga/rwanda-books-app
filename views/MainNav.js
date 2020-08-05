@@ -75,6 +75,7 @@ const AppTabNav = () => {
             inactiveTintColor: '#343a40',
             activeBackgroundColor: '#ffffff',
             inactiveBackgroundColor: '#ffffff',
+            keyboardHidesTabBar: true,
             tabStyle: {
               paddingTop: 8,
             },
